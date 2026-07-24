@@ -334,7 +334,8 @@ document.addEventListener('DOMContentLoaded', function () {
       time: "10:00 AM - 12:00 PM",
       track: "Track 1 - Workshop",
       trackClass: "track-1",
-      description: "Learn how to instrument a real-world e-commerce application using OpenTelemetry (OTel) to gain deep observability into its performance. This hands-on workshop covers manual and automatic instrumentation, collecting metrics and traces, and visualizing them in SigNoz to debug bottlenecks in real time."
+      description: "Learn how to instrument a real-world e-commerce application using OpenTelemetry (OTel) to gain deep observability into its performance. This hands-on workshop covers manual and automatic instrumentation, collecting metrics and traces, and visualizing them in SigNoz to debug bottlenecks in real time.",
+      prereq: "https://forums.tamillinuxcommunity.org/t/tossconf26-workshop/3315/7"
     },
     "workshop-ai-selfhost": {
       title: " Contributing to Frappe Framework",
@@ -342,7 +343,8 @@ document.addEventListener('DOMContentLoaded', function () {
       time: "10:00 AM - 12:00 PM",
       track: "Track 2 - Workshop",
       trackClass: "track-2",
-      description: "Frappe Framework is a full-stack open-source web development framework to build business apps quickly. The primary aim of this workshop on the Frappe Framework is to help participants get started contributing to the project."
+      description: "Frappe Framework is a full-stack open-source web development framework to build business apps quickly. The primary aim of this workshop on the Frappe Framework is to help participants get started contributing to the project.",
+      prereq: "https://forums.tamillinuxcommunity.org/t/tossconf26-workshop/3315/8"
     },
     "workshop-craft": {
       title: "The Art of Crafting Software",
@@ -350,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
       time: "01:00 PM - 03:00 PM",
       track: "Track 1 - Workshop",
       trackClass: "track-1",
-      description: "A deep dive into software engineering best practices, writing clean and maintainable code, and adopting a craftsman's mindset. This session covers foundational software design principles, testing strategies, and refactoring patterns to help developers write code that stands the test of time."
+      description: "A deep dive into software engineering best practices, writing clean and maintainable code, and adopting a craftsman's mindset. This session covers foundational software design principles, testing strategies, and refactoring patterns to help developers write code that stands the test of time.",
     },
     "workshop-nix": {
       title: "Adopting Nix from Day 1 through Nix Shells for Absolute Beginners",
@@ -358,7 +360,8 @@ document.addEventListener('DOMContentLoaded', function () {
       time: "01:00 PM - 03:00 PM",
       track: "Track 2 - Workshop",
       trackClass: "track-2",
-      description: "An absolute beginner's guide to Nix and Nix Shells. Learn how Nix can solve the 'it works on my machine' problem by providing reproducible, isolated developer environments. This workshop will walk you through writing your first nix-shell configuration to manage project dependencies effortlessly."
+      description: "An absolute beginner's guide to Nix and Nix Shells. Learn how Nix can solve the 'it works on my machine' problem by providing reproducible, isolated developer environments. This workshop will walk you through writing your first nix-shell configuration to manage project dependencies effortlessly.",
+      prereq: "https://forums.tamillinuxcommunity.org/t/tossconf26-workshop/3315/5"
     },
     "talk-rag": {
       title: "Chatbot development using RAG & Vector Database",
@@ -486,11 +489,13 @@ document.addEventListener('DOMContentLoaded', function () {
       const modalTime = document.getElementById('talk-modal-time');
       const modalSpeaker = document.getElementById('talk-modal-speaker');
       const modalDesc = document.getElementById('talk-modal-desc');
+      const modalPreReq = document.getElementById('talk-modal-prereq');
 
       talkCards.forEach(card => {
         card.addEventListener('click', function () {
           const talkId = this.getAttribute('data-talk-id');
           const talk = talkDescriptions[talkId];
+          console.log(talk);
           if (!talk) return;
 
           // Populate modal data
@@ -498,7 +503,12 @@ document.addEventListener('DOMContentLoaded', function () {
           modalSpeaker.innerHTML = `👤 ${talk.speaker}`;
           modalTime.innerHTML = `🕒 ${talk.time}`;
           modalDesc.textContent = talk.description;
-
+          if(talk.prereq){
+            modalPreReq.setAttribute("href",talk.prereq);
+            modalPreReq.style.display = 'inline';
+            modalPreReq.textContent = "Pre-requistes"
+          }
+          
           // Track badge classes & text
           modalTrack.textContent = talk.track;
           modalTrack.className = 'talk-modal-track-badge'; // reset
@@ -515,6 +525,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const closeTalkModal = function () {
         talkModal.classList.remove('active');
         talkModal.setAttribute('aria-hidden', 'true');
+        modalPreReq.style.display = 'none';
         document.body.style.overflow = '';
       };
 
