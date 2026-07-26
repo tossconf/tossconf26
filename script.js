@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modalContent.innerHTML = `
                 <div class="speaker-photo">
                     <img src= ${event.image} alt="Description of image">
-              
+
                 </div>
                 <div class="event-details">
                     <h3>${event.title}</h3>
